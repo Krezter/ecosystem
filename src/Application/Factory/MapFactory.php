@@ -2,8 +2,6 @@
 
 namespace App\Application\Factory;
 
-use App\Entity\Doctrine\MapSerialization;
-use App\Entity\Doctrine\User;
 use App\Entity\Ecosystem\Herbivorous;
 use App\Entity\Ecosystem\LargePredator;
 use App\Entity\Ecosystem\Observer;
@@ -12,7 +10,6 @@ use App\Entity\Ecosystem\Predator;
 use App\Entity\Ecosystem\Map;
 use App\Entity\Ecosystem\Tile;
 use Doctrine\ORM\EntityManagerInterface;
-use RuntimeException;
 
 /**
  * Class MapFactory
@@ -27,28 +24,22 @@ class MapFactory
 
     /**
      * @param int $loadFrom
-     * @param EntityManagerInterface $em
-     * @param int $userId
      * @return Map
      */
-    public static function loadMap(int $loadFrom, EntityManagerInterface $em, int $userId) : Map
+    public static function loadMap(int $loadFrom) : Map
     {
         switch ($loadFrom) {
             case self::FROM_FILE:
-                $map = file_get_contents(__DIR__.'/../var/dump.txt');
+                $map = file_get_contents(__DIR__.'\..\..\..\var\dump.txt');
                 break;
             case self::FROM_DB:
-                if ($userId !== 0) {
-                    $serMap = $em->getRepository(MapSerialization::class)
-                        ->findOneBy(['user_id' => $userId]);
-                    $map = $serMap ? $serMap->getMap() : null;
-                }
+//                if ($userId !== 0) {
+//                    $serMap = $em->getRepository(MapSerialization::class)
+//                        ->findOneBy(['user_id' => $userId]);
+//                    $map = $serMap ? $serMap->getMap() : null;
+//                }
                 break;
             case self::FROM_SESSION:
-                $map = null;
-                /**
-                 * TODO Session
-                 */
                 break;
         }
         if (!empty($map)) {
@@ -81,7 +72,7 @@ class MapFactory
     {
         switch ($saveTo) {
             case self::FROM_FILE:
-                file_put_contents(__DIR__.'/../var/dump.txt', serialize($map));
+                file_put_contents(__DIR__.'\..\..\..\var\dump.txt', serialize($map));
                 break;
             case self::FROM_DB:
 //                if ($token && $em) {
@@ -101,11 +92,8 @@ class MapFactory
 //                }
                 break;
             case self::FROM_SESSION:
-                //$_SESSION[Session::SERIALIZED_MAP_DATA] = serialize($map);
-                $session->set(self::SERIALIZED_MAP_DATA, serialize($map));
-                /**
-                 * TODO Session
-                 */
+//                $_SESSION[Session::SERIALIZED_MAP_DATA] = serialize($map);
+//                $session->set(self::SERIALIZED_MAP_DATA, serialize($map));
                 break;
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Application;
 
 use App\Application\Factory\EcosystemFactory;
+use App\Application\Factory\MapFactory;
 use App\Application\Logging\FileLog;
 use App\Application\Logic\MapProcessor;
 use App\Application\Messages\MapMessages;
@@ -43,12 +44,12 @@ class Main
 	}
 
     /**
-     * @param Map $map
      * @return int
      */
-    public function loadGame(Map $map) : int
+    public function loadGame() : int
     {
-        $this->map = $map;
+        $this->map = MapFactory::loadMap(MapFactory::FROM_FILE);
+
         return $this->map->getSize();
 	}
 
@@ -69,6 +70,7 @@ class Main
         }
 
         $this->mapMessages->endProgram();
+        MapFactory::recordMap(MapFactory::FROM_FILE, $this->map);
 	}
 
     /**

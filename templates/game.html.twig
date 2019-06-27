@@ -6,50 +6,40 @@
                 <h1 class="display-3">Экосистема</h1>
             </div>
         </div>
-        <div class="row justify-content-around">
-            <label for="size">Размер карты:</label>
-            <input id="size" class="parameters-form__input" type="number" min="1">
-        </div>
-        <div class="row justify-content-around">
-            <label for="time">Количество времени:</label>
-            <input id="time" class="parameters-form__input" type="number" min="1">
-        </div>
-        <div class="row justify-content-around">
-            <label for="csv">Запуск через csv файл:</label>
-            <input id="csv" class="parameters-form__file" type="file" name="csv">
-        </div>
-        <div class="row justify-content-around">
-            <input id="session-save" class="radio" type="radio">
-            <label for="session-save">Сохранить сеанс в текущей сессии</label>
-        </div>
-        <div class="row justify-content-around">
-            <input id="db-save" class="radio" type="radio" checked="checked">
-            <label for="db-save">Сохранить сеанс в базе данных</label>
-        </div>
-        <div class="row justify-content-around">
-            <div class="col-2">
-                <button id="new-game" type="submit" class="btn btn-outline-success btn-sm btn-block">Начать с начала</button>
+        {{ form_start(form) }}
+        <div class="row justify-content-start">
+            <div class="col-md-2 justify-content-start">
+                {{ form_row(form.size) }}
             </div>
-            <div class="col-2">
-                <button id="continue-game" type="submit" class="btn btn-outline-success btn-sm btn-block">Продолжить</button>
+            <div class="col-md-2 justify-content-start">
+                {{ form_row(form.time) }}
             </div>
-            <div class="col-1">
-                <button id="logout" type="submit" class="btn btn-outline-success btn-sm btn-block">Выход</button>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-3 justify-content-start">
+                {{ form_row(form.csv) }}
+            </div>
+            <div class="col-md-3 justify-content-start">
+                {{ form_row(form.status) }}
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-auto">
+                {{ form_row(form.start, {'attr': {'class': 'btn btn-outline-success btn-sm btn-block'}}) }}
+            </div>
+            <div class="col-auto">
+                {{ form_row(form.continue, {'attr': {'class': 'btn btn-outline-success btn-sm btn-block'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <a class="btn btn-outline-success btn-sm btn-block" href="{{ path('logout') }}">Выход</a>
             </div>
         </div>
         <div class="row showLogs">
-            <textarea id="textarea-logs" rows="31" cols="70" readonly="readonly" style="resize: none">{{ textarea }}</textarea>
-        </div>
-        <div class="row btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-            </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-            </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-            </label>
+            <label for="textarea-logs"></label>
+            <textarea id="textarea-logs" rows="20" cols="70" readonly="readonly" style="resize: none">{{ textarea }}</textarea>
         </div>
     </div>
 {% endblock %}

@@ -11,10 +11,7 @@ body {
 }
 
 .showLogs {
-    display:none;
     position: absolute;
-    margin-left: 65%;
-    padding: 20px;
     background: aliceblue
 }
 
