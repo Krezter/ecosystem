@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-3">Экосистема</h1>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            {{ form_start(form) }}
+            <div class="col">
+                {{ form_row(form.login, {label: 'Логин |'}) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.password, {label: 'Пароль |'}) }}
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-sm btn-block">Авторизация</button>
+            {{ form_end(form) }}
+        </div>
+        <hr>
+        <div class="alert alert-primary" role="alert">
+            {{ alert }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}

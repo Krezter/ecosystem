@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  web:
+    build: ./web
+    ports:
+      - '8080:80'
+    volumes:
+      - '../..:/var/php_app'
+    networks:
+      hostnet: {}
+
+  db_mysql:
+    image: mysql:5.7
+    volumes:
+      - "./db_mysql_data:/var/lib/mysql"
+    restart: always
+    container_name: ecosystem_db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=f^n@llyitW0rkS!
+    networks:
+      hostnet: {}
+
+volumes:
+  db_mysql_data:
+
+networks:
+  hostnet:
+    name: "ecosystem-net"
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/24

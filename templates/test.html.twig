@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-3">Экосистема</h1>
+            </div>
+        </div>
+        {{ form_start(form) }}
+        <div class="row justify-content-start">
+            {{ form_row(form.size, {label: 'Размер карты |'}) }}
+        </div>
+        <div class="row justify-content-start">
+            {{ form_row(form.time, {label: 'Время наблюдения |'}) }}
+        </div>
+        <div class="row justify-content-start">
+            {{ form_row(form.csv, {label: 'CSV файл |'}) }}
+        </div>
+        <div class="row justify-content-start">
+            {{ form_row(form.status, {label: 'Сохранение текущей игры |'}) }}
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-success btn-sm btn-block">Начать с начала</button>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-success btn-sm btn-block">Продолжить</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-success btn-sm btn-block">Выход</button>
+            </div>
+        </div>
+        <div class="row showLogs">
+            <label for="textarea-logs"></label>
+            <textarea id="textarea-logs" rows="31" cols="70" readonly="readonly" style="resize: none">{{ textarea }}</textarea>
+        </div>
+    </div>
+{% endblock %}
